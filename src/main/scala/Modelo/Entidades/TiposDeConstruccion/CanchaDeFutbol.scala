@@ -6,5 +6,5 @@ case class CanchaDeFutbol(materiales: Material*)
 
 
 object CanchaDeFutbol extends TipoDeConstruccion{
-
+  override def diasDeConstruccion(): Int = 1
 }

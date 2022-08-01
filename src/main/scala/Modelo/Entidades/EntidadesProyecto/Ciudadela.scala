@@ -1,8 +1,15 @@
 package Modelo.Entidades.EntidadesProyecto
 
-case class Ciudadela(OrdenesDeConstruccion: List[OrdenDeConstruccion] = Nil)
+import java.time.LocalDateTime
+
+case class Ciudadela(ordenesDeConstruccion: List[OrdenDeConstruccion] = Nil)
 
 object Ciudadela{
 
-  def calcularPlazo(): Fecha = {Fecha(1,2,3)}
+  def calcularPlazo(ordenesDeConstruccion: List[OrdenDeConstruccion]): Unit = {
+  }
+
+  def verificarHorario(ordenesDeConstruccion: List[OrdenDeConstruccion]) = {
+
+  }
 }
