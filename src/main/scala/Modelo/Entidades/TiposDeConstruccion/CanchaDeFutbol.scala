@@ -1,13 +1,11 @@
 package Modelo.Entidades.TiposDeConstruccion
 
 import Modelo.Entidades.Materiales.{Adobe, Arena, Cemento, Grava, Madera}
-import Modelo.Traits.{Material, TipoDeConstruccion}
+import Modelo.Traits.{ComportamientoTipoDeConstruccion, Material, TipoDeConstruccion}
 
-case class CanchaDeFutbol(cemento: Cemento, grava: Grava, arena: Arena, madera: Madera, adobe: Adobe)
+case class CanchaDeFutbol(materiales:Material*) extends TipoDeConstruccion
 
 
-object CanchaDeFutbol extends TipoDeConstruccion{
+object CanchaDeFutbol extends ComportamientoTipoDeConstruccion{
   override def diasDeConstruccion(): Int = 1
-
-  override def verificarMateriales(): Boolean = ???
 }
