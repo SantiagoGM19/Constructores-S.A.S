@@ -1,5 +1,5 @@
 package Modelo.Traits
 
-trait ComportamientoTipoDeConstruccion {
+trait ComportamientoTipoDeConstruccion extends TipoDeConstruccion {
   def diasDeConstruccion(): Int
 }
