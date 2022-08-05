@@ -1,4 +1,4 @@
 package Modelo.Traits
 
-trait TipoDeConstruccion {
+trait TipoDeConstruccion extends ComportamientoTipoDeConstruccion {
 }

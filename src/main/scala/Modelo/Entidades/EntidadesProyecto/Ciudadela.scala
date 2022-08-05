@@ -9,7 +9,11 @@ case class Ciudadela(ordenesDeConstruccion: List[OrdenDeConstruccion] = Nil)
 
 object Ciudadela{
 
-  def calcularPlazo(ordenesDeConstruccion: List[OrdenDeConstruccion]): Unit = {
+  //Para calcular el plazo en el que se va a terminar la ciudadela se debe saber la fecha mas alta de todas las construcciones actuales
+  def calcularPlazo(ordenesDeConstruccion: List[OrdenDeConstruccion]) = {
+    val fechasDeFinalizacion = ordenesDeConstruccion.map(orden => orden.fechaFinalizacion)
+    val fechasOrdenadas = fechasDeFinalizacion.sortBy(_.getDayOfYear)(Ordering[Int].reverse)
+    fechasOrdenadas(0)
   }
 
   def generarSolicitud(tipoDeConstruccion: ConstruccionFactory, coordenadas: Coordenadas, fecha: LocalDateTime) = {

@@ -1,8 +1,8 @@
 package Modelo.Entidades.EntidadesProyecto
 
+import Modelo.Entidades.Estados.{Pendiente, Rechazada}
 import Modelo.Entidades.Materiales.{Adobe, Arena, Cemento, Grava, Madera}
 import Modelo.Entidades.TiposDeConstruccion.{CanchaDeFutbol, Casa, Edificio, Gimnasio, Lago}
-import Modelo.Traits.FactoryTraits.ConstruccionFactory
 import Modelo.Traits.{Material, TipoDeConstruccion}
 
 import java.time.LocalDateTime
@@ -12,7 +12,7 @@ case class Solicitud(tipoDeConstruccion: TipoDeConstruccion, coordenadas: Coorde
 
 object Solicitud{
 
-  def sondearSolicitud(solicitud: Solicitud, listaDeCoordenadas: ListaDeCoordenadas, materiales: List[Material]): Unit = {
+  def sondearSolicitud(solicitud: Solicitud, listaDeCoordenadas: ListaDeCoordenadas, materiales: List[Material]):OrdenDeConstruccion = {
 
     val construccionSolicitada = solicitud.tipoDeConstruccion
     val coordenadasSolicitadas = solicitud.coordenadas
@@ -29,8 +29,11 @@ object Solicitud{
     if(existenRecursosSuficientes){
       val resultadoCoordenadas =  ListaDeCoordenadas.agregarNuevasCoordenadas(coordenadasSolicitadas, listaDeCoordenadas)
       resultadoCoordenadas match {
-        case Right(value) =>
+        case Right(value) => OrdenDeConstruccion(solicitud, Pendiente("Pendiente comenzar construccion"), solicitud.fecha.plusDays(1), solicitud.fecha.plusDays(construccionSolicitada.diasDeConstruccion() + 1))
+        case Left(value) => OrdenDeConstruccion(solicitud, Rechazada(value))
       }
+    }else{
+      OrdenDeConstruccion(solicitud, Rechazada("No existen recursos suficientes para esta construccion"))
     }
   }
 
@@ -48,13 +51,5 @@ object Solicitud{
     val resultadoFallidos = resultados.map(resultado => resultado.isLeft).filter(booleano =>  booleano == true)
 
     resultadoFallidos.isEmpty
-  }
-
-  def aprobarSolicitud() = {
-
-  }
-
-  def rechazarSolicitud() = {
-
   }
 }

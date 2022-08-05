@@ -5,7 +5,7 @@ import Modelo.Traits.Estado
 
 import java.time.LocalDateTime
 
-case class OrdenDeConstruccion(solicitud: Solicitud, estado: Estado = Pendiente(), fechaInicio: LocalDateTime = null, fechaFinalizacion: LocalDateTime = null)
+case class OrdenDeConstruccion(solicitud: Solicitud, estado: Estado, fechaInicio: LocalDateTime = null, fechaFinalizacion: LocalDateTime = null)
 
 object OrdenDeConstruccion{
 
@@ -29,7 +29,7 @@ object OrdenDeConstruccion{
 
       val estadoNuevo = fechaActualEsMayor match {
         case true => ordenDeConstruccion.estado match {
-          case Pendiente() => EnProgeso()
+          case Pendiente("") => EnProgeso()
         }
       }
 
@@ -41,7 +41,7 @@ object OrdenDeConstruccion{
 
       val estadoNuevo = esFechaDeFinalizacion match {
         case true => ordenDeConstruccion.estado match {
-          case EnProgeso() => Terminada()
+          case EnProgeso("") => Terminada()
         }
       }
 
